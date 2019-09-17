@@ -6,7 +6,7 @@ const shortenersSchema = new Schema(
   {
     urls: {
       type: [String],
-      required: [true, "url is required."],
+      required: [true, "url is required"],
       validate: {
         validator: urls => urls.length && urls.every(validUrl.isWebUri),
         message: "must be a valid list of urls"
@@ -14,9 +14,13 @@ const shortenersSchema = new Schema(
     },
     hash: {
       type: String,
-      minlength: 1,
-      maxlength: 14,
-      required: [true, "you gotta pass hash"] // this is wrong
+      minlength: [1, "min lengh is 1 character"],
+      maxlength: [14, "max length is 14 characters"],
+      validate: {
+        validator: hash => /^[A-Za-z0-9-_]+$/.test(hash),
+        message: "can only contain [A-Za-z0-9-_]"
+      },
+      required: [true, "hash is required"] // this is wrong
     }
   },
   { timestamps: true }
