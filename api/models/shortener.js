@@ -8,12 +8,14 @@ const shortenersSchema = new Schema(
       type: [String],
       required: [true, "url is required."],
       validate: {
-        validator: urls => urls.every(validUrl.isWebUri),
+        validator: urls => urls.length && urls.every(validUrl.isWebUri),
         message: "must be a valid list of urls"
       }
     },
     hash: {
       type: String,
+      minlength: 1,
+      maxlength: 14,
       required: [true, "you gotta pass hash"] // this is wrong
     }
   },
