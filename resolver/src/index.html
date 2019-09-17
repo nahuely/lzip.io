@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script>
+      function addMessage(message) {
+        var newElement = document.createElement("p");
+        var newContent = document.createTextNode(message);
+        newElement.appendChild(newContent);
+        appendElement(newElement);
+      }
+
+      function appendElement(
+        element,
+        container = document.querySelector("#container")
+      ) {
+        container.appendChild(element);
+      }
+
+      function openPages(shortenerId) {
+        fetch(`http://127.0.0.1:8080/api/shortener/${id}`)
+          .then(response => response.json())
+          .then(({ data }) => {
+            const newTabs = data.urls.map(url => window.open(url, "_blank"));
+            const tabsOpened = newTabs.every(Boolean);
+            if (tabsOpened) {
+              addMessage("excelent you are great buddy");
+            } else {
+              addMessage(
+                "you have to allow popups for this page, then refresh"
+              );
+            }
+          })
+          .catch(() => {
+            addMessage("the id doesnt exist brother");
+          });
+      }
+
+      const id = location.pathname.replace("/r/", "");
+      openPages(id);
+    </script>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>

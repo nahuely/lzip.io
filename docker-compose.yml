@@ -1,0 +1,49 @@
+version: "3"
+services:
+  gateway:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./gateway
+    ports:
+      - 8080:80
+  cache:
+    image: redis
+    restart: always
+  db:
+    image: bitnami/mongodb
+    restart: always
+    environment:
+      - MONGODB_USERNAME=alfa
+      - MONGODB_PASSWORD=password
+      - MONGODB_DATABASE=lzip
+    volumes:
+      - ./db/data:/bitnami
+    user: root
+    ports:
+      - 27017:27017
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - ./client:/code
+  api:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - ./api:/code
+    environment:
+      - PORT=8080
+      - MONGODB_URL=mongodb://alfa:password@db:27017/lzip
+      - REDIS_URL=redis://cache:6379
+
+  resolver:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./resolver
+    volumes:
+      - ./resolver/src:/usr/share/nginx/html
