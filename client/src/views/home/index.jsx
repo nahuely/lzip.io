@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-function Home() {
+function Home({ history }) {
   return (
     <div>
-      <button>create shortener</button>
+      <button onClick={() => history.push("/shortener/create")}>
+        create shortener
+      </button>
     </div>
   );
 }
