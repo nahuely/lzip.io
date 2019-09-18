@@ -10,6 +10,7 @@ exports.createShortener = async function({ hash, links }) {
     });
     return Response.success(201, response);
   } catch (error) {
+    //TODO: dont return mongoose error without formating
     return Response.error(400, error);
   }
 };
