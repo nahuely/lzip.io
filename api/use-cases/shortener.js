@@ -2,11 +2,12 @@ const Shortener = require("../models/shortener");
 const Response = require("../common/response");
 const shortid = require("shortid");
 
-exports.createShortener = async function({ hash, links }) {
+exports.createShortener = async function({ hash, links, description }) {
   try {
     const response = await Shortener.create({
       hash: hash || shortid.generate(),
-      urls: links
+      urls: links,
+      description
     });
     return Response.success(201, response);
   } catch (error) {
