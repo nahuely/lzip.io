@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input } from "../../../components";
+import { RESOLVER_URL } from "../../../config/constants";
 
 function CreateShortener({ history }) {
   const [inputs, setInputs] = useState([""]);
@@ -52,6 +53,12 @@ function CreateShortener({ history }) {
     setDescription("");
   }
 
+  function handleCopyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert("the link was copied to your clipboard");
+    });
+  }
+
   if (loader)
     return (
       <div>
@@ -62,7 +69,13 @@ function CreateShortener({ history }) {
   if (data) {
     return (
       <div>
-        <p>{data}</p>
+        <p>{`${RESOLVER_URL}/${data}`}</p>
+        <Button
+          onClick={() => handleCopyToClipboard(`${RESOLVER_URL}/${data}`)}
+        >
+          copy shortener
+        </Button>
+        <br />
         <Button onClick={() => setData(null)}>create new shortener</Button>
       </div>
     );
