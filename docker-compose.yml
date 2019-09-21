@@ -10,13 +10,14 @@ services:
   cache:
     image: redis
     restart: always
+  message-broker:
+    image: redis
+    restart: always
   db:
     image: bitnami/mongodb
     restart: always
-    environment:
-      - MONGODB_USERNAME=alfa
-      - MONGODB_PASSWORD=password
-      - MONGODB_DATABASE=lzip
+    env_file:
+      - ./db/.env
     volumes:
       - ./db/data:/bitnami
     user: root
@@ -35,11 +36,17 @@ services:
       context: ./api
     volumes:
       - ./api:/code
-    environment:
-      - PORT=8080
-      - MONGODB_URL=mongodb://alfa:password@db:27017/lzip
-      - REDIS_URL=redis://cache:6379
-
+    env_file:
+      - ./api/.env
+  worker:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - ./worker:/code
+    env_file:
+      - ./worker/.env
   resolver:
     restart: always
     build:
