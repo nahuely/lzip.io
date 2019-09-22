@@ -38,6 +38,15 @@ services:
       - ./api:/code
     env_file:
       - ./api/.env
+  analytics:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./analytics
+    volumes:
+      - ./analytics:/code
+    env_file:
+      - ./analytics/.env
   worker:
     restart: always
     build:
