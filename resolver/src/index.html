@@ -21,25 +21,37 @@
       }
 
       function openPages(shortenerId) {
-        fetch(`http://127.0.0.1:8080/api/shortener/${id}`)
+        fetch(`http://localhost:8080/api/shortener/${id}`)
           .then(response => response.json())
           .then(({ data }) => {
+            let success = true;
             const newTabs = data.urls.map(url => window.open(url, "_blank"));
             const tabsOpened = newTabs.every(Boolean);
             if (tabsOpened) {
               addMessage("excelent you are great buddy");
             } else {
+              success = false;
               addMessage(
                 "you have to allow popups for this page, then refresh"
               );
             }
+            return fetch(`http://analytics.localhost:8080/api/stats`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                hash: id,
+                success
+              })
+            });
           })
           .catch(() => {
             addMessage("the id doesnt exist brother");
           });
       }
 
-      const id = location.pathname.replace("/r/", "");
+      const id = location.pathname.replace("/", "");
       openPages(id);
     </script>
   </head>
