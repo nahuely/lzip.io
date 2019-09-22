@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Input } from "../../../components";
 import { RESOLVER_URL } from "../../../config/constants";
 
@@ -27,7 +28,7 @@ function CreateShortener({ history }) {
       description: description || undefined
     };
     setLoader(true);
-    fetch("http://127.0.0.1:8080/api/shortener", {
+    fetch("http://localhost:8080/api/shortener", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -75,6 +76,8 @@ function CreateShortener({ history }) {
         >
           copy shortener
         </Button>
+        <br />
+        <Link to={`/shortener/track/${data}`}>go to tracking</Link>
         <br />
         <Button onClick={() => setData(null)}>create new shortener</Button>
       </div>

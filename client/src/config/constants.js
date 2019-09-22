@@ -1,1 +1,1 @@
-export const RESOLVER_URL = "http://127.0.0.1:8080/r";
+export const RESOLVER_URL = "http://r.localhost:8080";
