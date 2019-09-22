@@ -9,6 +9,10 @@ const statsSchema = new Schema(
     hash: {
       type: String
     },
+    count: {
+      type: Number,
+      default: 0
+    },
     views: [hitsSchema]
   },
   { timestamps: true }

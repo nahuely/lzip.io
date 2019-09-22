@@ -1,11 +1,14 @@
 const Stat = require("../models/stats");
 const Response = require("../common/response");
 
-exports.createShortener = async function(hash, browser, referer, success) {
+exports.createOrUpdateStat = async function(hash, browser, referer, success) {
   try {
     const response = await Stat.findOneAndUpdate(
       { hash },
       {
+        $inc: {
+          count: 1
+        },
         $push: {
           views: {
             browser,
@@ -22,7 +25,7 @@ exports.createShortener = async function(hash, browser, referer, success) {
   }
 };
 
-exports.getShortenerById = async function(id) {
+exports.getStatById = async function(id) {
   try {
     const response = await Stat.findOne({ hash: id });
     if (!response) throw new Error("no hash id");
