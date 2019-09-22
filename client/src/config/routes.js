@@ -18,8 +18,8 @@ export default {
         path: "/create",
         component: views.Shortener.create
       },
-      new: {
-        path: "/track",
+      detail: {
+        path: "/track/:shortenerId",
         component: views.Shortener.track
       }
     }
