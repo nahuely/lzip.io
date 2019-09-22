@@ -19,6 +19,7 @@ exports.createShortener = async function({ hash, links, description }) {
 exports.getShortenerById = async function(id) {
   try {
     const response = await Shortener.findOne({ hash: id });
+    if (!response) throw new Error("hash doesnt exist");
     return Response.success(200, response);
   } catch (error) {
     return Response.error(404, error);
