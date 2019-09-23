@@ -7,6 +7,9 @@ services:
       context: ./gateway
     ports:
       - 8080:80
+    depends_on:
+      - api
+      - analytics
   cache:
     image: redis
     restart: always
@@ -38,6 +41,8 @@ services:
       - ./api:/code
     env_file:
       - ./api/.env
+    depends_on:
+      - db
   analytics:
     restart: always
     build:
@@ -47,6 +52,8 @@ services:
       - ./analytics:/code
     env_file:
       - ./analytics/.env
+    depends_on:
+      - db
   worker:
     restart: always
     build:
