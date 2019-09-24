@@ -1,2 +1,2 @@
-var redis = require("redis");
-module.exports = redis.createClient(process.env.REDIS_URL);
+var Redis = require("ioredis");
+module.exports = new Redis(process.env.REDIS_URL);

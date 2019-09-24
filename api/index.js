@@ -1,6 +1,5 @@
 const app = require("./app");
 const connect = require("./helpers/connect");
-const redis = require("./service/redis");
 
 const startServer = () => {
   connect(process.env.MONGODB_URL)
@@ -13,8 +12,3 @@ const startServer = () => {
 };
 
 startServer();
-
-// order of startup
-// 1. start mongodb
-// 2. start redis
-// 3. start express
