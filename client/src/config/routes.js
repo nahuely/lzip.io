@@ -21,6 +21,10 @@ export default {
       detail: {
         path: "/track/:shortenerId",
         component: views.Shortener.track
+      },
+      inspect: {
+        path: "/inspect/:shortenerId",
+        component: views.Shortener.inspect
       }
     }
   }
