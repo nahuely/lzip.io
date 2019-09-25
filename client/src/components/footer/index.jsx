@@ -1,13 +1,13 @@
 import React from "react";
 
-import "./styles.css";
+import "./styles.scss";
 
-const Footer = () => {
+function Footer() {
   return (
     <div className="footer">
       <p>Footer</p>
     </div>
   );
-};
+}
 
 export default Footer;

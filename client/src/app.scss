@@ -1,0 +1,18 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    height: 50px;
+  }
+
+  &__main {
+    padding: 10px;
+    flex: 1;
+  }
+
+  &__footer {
+    height: 30px;
+  }
+}

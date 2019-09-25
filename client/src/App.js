@@ -6,30 +6,27 @@ import ErrorBoundary from "./components/error-boundary";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import routes from "./config/routes";
+import views from "./views";
+
+import "./app.scss";
 
 function App() {
   return (
     <ErrorBoundary>
       <Router history={history}>
-        <div>
-          <div>
+        <div className="app">
+          <div className="app__header">
             <Header />
           </div>
-          <div>
+          <div className="app__main">
             <Switch>
               {Object.entries(routes).map(([_, route]) =>
                 generateRoutes(route, route.path)
               )}
-              <Route
-                render={() => (
-                  <div>
-                    <p>not found</p>
-                  </div>
-                )}
-              />
+              <Route component={views.NotFound} />
             </Switch>
           </div>
-          <div>
+          <div className="app__footer">
             <Footer />
           </div>
         </div>
