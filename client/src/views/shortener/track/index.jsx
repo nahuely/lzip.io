@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useFetch } from "../../../hooks";
 
 function TrackShortener({ match }) {
-  const [count, setCount] = useState(0);
-  const [loader, setLoader] = useState(false);
   const shortenerId = match.params.shortenerId;
+  const [loader, error, data] = useFetch(
+    `http://analytics.localhost:8080/api/stats/${shortenerId}`
+  );
 
-  useEffect(() => {
-    setLoader(true);
-    fetch(`http://analytics.localhost:8080/api/stats/${shortenerId}`)
-      .then(response => response.json())
-      .then(({ data }) => {
-        setCount(data.count);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, [shortenerId]);
+  if (loader) return <div>loading...</div>;
+
+  if (error) return <div>error</div>;
+
+  console.log(data);
 
   return (
     <div>
-      <p>{count}</p>
+      <p>{data.count}</p>
     </div>
   );
 }

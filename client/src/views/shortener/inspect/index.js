@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useFetch } from "../../../hooks";
 
 function InspectShortener({ match }) {
-  const [data, setData] = useState({});
-  const [loader, setLoader] = useState(false);
   const shortenerId = match.params.shortenerId;
-
-  useEffect(() => {
-    setLoader(true);
-    fetch(`http://localhost:8080/api/shortener/inspect/${shortenerId}`)
-      .then(response => response.json())
-      .then(({ data }) => {
-        setData(data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, [shortenerId]);
+  const [loader, error, data] = useFetch(
+    `http://localhost:8080/api/shortener/inspect/${shortenerId}`
+  );
 
   if (loader) return <div>loading...</div>;
+
+  if (error) return <div>error</div>;
+
+  console.log(data);
 
   return (
     <div>
