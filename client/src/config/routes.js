@@ -14,13 +14,23 @@ export default {
   shortener: {
     path: "/shortener",
     routes: {
-      list: {
+      create: {
         path: "/create",
         component: views.Shortener.create
       },
-      detail: {
+      trackForm: {
+        path: "/track",
+        exact: true,
+        component: views.Shortener.trackForm
+      },
+      track: {
         path: "/track/:shortenerId",
         component: views.Shortener.track
+      },
+      inspecForm: {
+        path: "/inspect",
+        exact: true,
+        component: views.Shortener.inspectForm
       },
       inspect: {
         path: "/inspect/:shortenerId",
