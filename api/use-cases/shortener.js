@@ -18,13 +18,19 @@ exports.createShortener = async function({ hash, links, description }) {
 
 exports.getShortenerById = async function(id) {
   try {
-    const cache = await redisClient.get(id);
+    const cache = await redisClient.get(`shortener:${id}`);
     if (cache) {
+      redisClient.expire(`shortener:${id}`, 1800);
       return Response.success(200, JSON.parse(cache));
     } else {
       const shortener = await Shortener.findOne({ hash: id });
       if (!shortener) throw new Error("hash doesnt exist");
-      redisClient.set(shortener.hash, JSON.stringify(shortener), "EX", 1800);
+      redisClient.set(
+        `shortener:${shortener.hash}`,
+        JSON.stringify(shortener),
+        "EX",
+        1800
+      );
       return Response.success(200, shortener);
     }
   } catch (error) {
