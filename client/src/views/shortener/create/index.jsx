@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Input } from "../../../components";
+import { Button, Input, Loader } from "../../../components";
 import { RESOLVER_URL } from "../../../config/constants";
+import "./styles.scss";
 
 function CreateShortener({ history }) {
   const [inputs, setInputs] = useState([""]);
@@ -60,63 +61,73 @@ function CreateShortener({ history }) {
     });
   }
 
-  if (loader)
-    return (
-      <div>
-        <p>creating shortener</p>
-      </div>
-    );
-
-  if (data) {
-    return (
-      <div>
-        <p>{`${RESOLVER_URL}/${data}`}</p>
-        <Button
-          onClick={() => handleCopyToClipboard(`${RESOLVER_URL}/${data}`)}
-        >
-          copy shortener
-        </Button>
-        <br />
-        <Link to={`/shortener/track/${data}`}>go to tracking</Link>
-        <br />
-        <Button onClick={() => setData(null)}>create new shortener</Button>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <Input
-        value={hash}
-        onChange={value => setHash(value.target.value)}
-        placeholder="customize hash"
-      />
-      <br />
-      <Input
-        value={description}
-        onChange={value => setDescription(value.target.value)}
-        placeholder="add description"
-      />
-      <br />
-      {inputs.map((value, index) => {
-        return (
-          <div key={index}>
-            <Input
-              value={value}
-              onChange={value => handleChangeInput(value.target.value, index)}
-              placeholder="add url"
-            />
+    <div className="view view__container">
+      {loader ? (
+        //loading
+        <Loader />
+      ) : data ? (
+        //result
+        <div>
+          <p>{`${RESOLVER_URL}/${data}`}</p>
+          <Button
+            onClick={() => handleCopyToClipboard(`${RESOLVER_URL}/${data}`)}
+          >
+            copy shortener
+          </Button>
+          <br />
+          <Link to={`/shortener/track/${data}`}>go to tracking</Link>
+          <br />
+          <Button onClick={() => setData(null)}>create new shortener</Button>
+        </div>
+      ) : (
+        //form
+        <dir className="form form__container">
+          <div className="form__header">
+            <div className="form__title">
+              <p>create shortener</p>
+            </div>
+            <div className="form__explanation">
+              <p>
+                here you can do this and that, but you cannot do other things
+                because is not allowed
+              </p>
+            </div>
           </div>
-        );
-      })}
-
-      <br />
-      <Button onClick={handleAddInput}>add more inputs</Button>
-      <br />
-      <Button onClick={handleCreateShortener}>create shortener</Button>
-      <Button onClick={handleResetForm}>reset</Button>
-      <br />
-      <Button onClick={() => history.push("/")}>back home</Button>
+          <div className="form__inputs">
+            <Input
+              className="form__input"
+              value={hash}
+              onChange={value => setHash(value.target.value)}
+              placeholder="customize hash"
+            />
+            <Input
+              className="form__input"
+              value={description}
+              onChange={value => setDescription(value.target.value)}
+              placeholder="add description"
+            />
+            {inputs.map((value, index) => {
+              return (
+                <Input
+                  className="form__input"
+                  value={value}
+                  key={index}
+                  onChange={value =>
+                    handleChangeInput(value.target.value, index)
+                  }
+                  placeholder="add url"
+                />
+              );
+            })}
+            <Button onClick={handleAddInput}>add more inputs</Button>
+          </div>
+          <div className="form__controls">
+            <Button onClick={handleCreateShortener}>create</Button>
+            <Button onClick={handleResetForm}>reset</Button>
+          </div>
+        </dir>
+      )}
     </div>
   );
 }

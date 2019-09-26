@@ -3,10 +3,10 @@ import { useFetch } from "../../../hooks";
 import { Loader, Button } from "../../../components";
 import "./styles.scss";
 
-function TrackShortener({ match, history }) {
+function InspectShortener({ match, history }) {
   const shortenerId = match.params.shortenerId;
   const [loader, error, data] = useFetch(
-    `http://analytics.localhost:8080/api/stats/${shortenerId}`
+    `http://localhost:8080/api/shortener/inspect/${shortenerId}`
   );
 
   return (
@@ -24,11 +24,21 @@ function TrackShortener({ match, history }) {
         </div>
       ) : (
         <div>
-          <p>{data.count}</p>
+          <p>
+            the shortener id is: <span>{data.hash}</span>
+          </p>
+          <p>the description is: "{data.description}"</p>
+          <p>the shortener resolves to this urls:</p>
+          {data.urls &&
+            data.urls.map((url, index) => (
+              <a key={index} href={url} target="_blank">
+                {url}
+              </a>
+            ))}
         </div>
       )}
     </div>
   );
 }
 
-export default TrackShortener;
+export default InspectShortener;
