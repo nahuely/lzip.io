@@ -24,7 +24,7 @@ exports.getShortenerById = async function(id) {
       return Response.success(200, JSON.parse(cache));
     } else {
       const shortener = await Shortener.findOne({ hash: id });
-      if (!shortener) throw new Error("hash doesnt exist");
+      if (!shortener) throw new Error(`the shortener (${id}) doesnt exist`);
       redisClient.set(
         `shortener:${shortener.hash}`,
         JSON.stringify(shortener),
@@ -34,6 +34,6 @@ exports.getShortenerById = async function(id) {
       return Response.success(200, shortener);
     }
   } catch (error) {
-    return Response.error(404, error);
+    return Response.error(404, error.message, error);
   }
 };

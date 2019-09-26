@@ -28,9 +28,9 @@ exports.createOrUpdateStat = async function(hash, browser, referer, success) {
 exports.getStatById = async function(id) {
   try {
     const response = await Stat.findOne({ hash: id });
-    if (!response) throw new Error("no hash id");
+    if (!response) throw new Error(`the shortener (${id}) doesnt exist`);
     return Response.success(200, response);
   } catch (error) {
-    return Response.error(404, error);
+    return Response.error(404, error.message, error);
   }
 };
