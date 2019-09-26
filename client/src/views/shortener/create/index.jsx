@@ -82,7 +82,7 @@ function CreateShortener({ history }) {
         </div>
       ) : (
         //form
-        <dir className="form form__container">
+        <div className="form form__container">
           <div className="form__header">
             <div className="form__title">
               <p>create shortener</p>
@@ -126,7 +126,7 @@ function CreateShortener({ history }) {
             <Button onClick={handleCreateShortener}>create</Button>
             <Button onClick={handleResetForm}>reset</Button>
           </div>
-        </dir>
+        </div>
       )}
     </div>
   );

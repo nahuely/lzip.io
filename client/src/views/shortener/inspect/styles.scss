@@ -1,10 +1,26 @@
 .shortener-details {
   &__id {
+    margin-bottom: 20px;
+    span {
+      font-weight: bold;
+    }
   }
 
   &__description {
+    margin-bottom: 20px;
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &__links {
+    margin-bottom: 20px;
   }
 
   &__link {
+    margin-bottom: 10px;
+    a {
+      font-weight: bold;
+    }
   }
 }
