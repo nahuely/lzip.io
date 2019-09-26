@@ -1,6 +1,9 @@
 import React from "react";
 import "./style.scss";
 
-const Input = props => <input className="input" {...props} />;
+const Input = ({ className = "", ...props }) => {
+  const classes = ["input", ...className.split(" ")];
+  return <input className={classes.join(" ")} {...props} />;
+};
 
 export default Input;
