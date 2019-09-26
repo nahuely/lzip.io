@@ -25,13 +25,13 @@ function InspectShortener({ match, history }) {
       ) : (
         <div className="shortener-details">
           <p className="shortener-details__id">
-            the shortener id is: <span>{data.hash}</span>
+            The shortener id is: <span>{data.hash}</span>
           </p>
           <p className="shortener-details__description">
-            the description is: <span>"{data.description}"</span>
+            The description is: <span>"{data.description}"</span>
           </p>
           <p className="shortener-details__links">
-            the shortener resolves to this urls:
+            The shortener resolves to this urls:
           </p>
           {data.urls.map((url, index) => (
             <div className="shortener-details__link" key={index}>

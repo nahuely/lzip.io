@@ -9,10 +9,10 @@
   text-transform: uppercase;
   width: auto;
   box-sizing: border-box;
-  box-shadow: 0px 0px 2px darkgrey;
+  box-shadow: 0px 0px 1px 1px black;
   background-color: white;
   transition: box-shadow 250ms ease, transform 250ms ease;
-  border: 1px solid darkgrey;
+  border: 1px solid black;
 
   &:active {
     box-shadow: 0 0 transparent;

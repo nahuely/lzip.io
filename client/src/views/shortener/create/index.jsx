@@ -88,10 +88,7 @@ function CreateShortener({ history }) {
               <p>create shortener</p>
             </div>
             <div className="form__explanation">
-              <p>
-                here you can do this and that, but you cannot do other things
-                because is not allowed
-              </p>
+              <p>create shortener that open multiple links</p>
             </div>
           </div>
           <div className="form__inputs">
