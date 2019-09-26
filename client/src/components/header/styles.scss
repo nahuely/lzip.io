@@ -1,3 +1,49 @@
+@keyframes close-top {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes close-bottom {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes coloress {
+  0% {
+    background-color: aquamarine;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
+@keyframes strong {
+  0% {
+    opacity: 0;
+    right: -100px;
+  }
+
+  80% {
+    right: 2px;
+  }
+
+  100% {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
 .menu {
   height: 100%;
   width: 100%;
@@ -6,6 +52,53 @@
   justify-content: space-between;
   padding: 0 10px;
   box-sizing: border-box;
+  &__logo {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    margin: 20px;
+    animation: coloress 1000ms linear forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      animation-name: strong;
+      animation-duration: 1000ms;
+      animation-timing-function: cubic-bezier(0.25, 0.1, 0, 1.53);
+      animation-iteration-count: 1;
+      position: relative;
+      font-weight: bold;
+    }
+
+    &::after {
+      content: "";
+      background-color: black;
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      right: -15px;
+      top: -2px;
+      transform: rotate(0deg);
+      transform-origin: 0% 50%;
+      animation: close-top 1000ms ease-out forwards;
+    }
+
+    &::before {
+      content: "";
+      background-color: black;
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      right: -15px;
+      bottom: -2px;
+      transform: rotate(0deg);
+      transform-origin: 0% 50%;
+      animation: close-bottom 1000ms ease-out forwards;
+    }
+  }
   &__list {
     display: flex;
     flex-direction: row;

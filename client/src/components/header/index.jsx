@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className="menu">
       <div className="menu__logo">
-        <h1>LOGO</h1>
+        <p>lzip.io</p>
       </div>
       <div className="menu__links">
         <ul className="menu__list">
