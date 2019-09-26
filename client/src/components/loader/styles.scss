@@ -1,0 +1,33 @@
+.loader {
+  &__layover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__spinner {
+    animation: change-background 500ms running infinite;
+  }
+}
+
+@keyframes change-background {
+  0% {
+    opacity: 1;
+    font-size: 20px;
+  }
+
+  50% {
+    opacity: 0.5;
+    font-size: 19px;
+  }
+
+  100% {
+    opacity: 1;
+    font-size: 20px;
+  }
+}
