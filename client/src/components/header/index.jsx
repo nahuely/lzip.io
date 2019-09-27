@@ -9,7 +9,13 @@ const Header = () => {
   return (
     <div className="menu">
       <div className="menu__logo">
-        <p>lzip.io</p>
+        <NavLink
+          to={getRoute(["home"], routes)}
+          className="menu__link menu__link--no-underline"
+          exact
+        >
+          <p>lzip.io</p>
+        </NavLink>
       </div>
       <div className="menu__links">
         <ul className="menu__list">

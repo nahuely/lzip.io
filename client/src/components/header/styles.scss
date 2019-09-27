@@ -20,7 +20,7 @@
 
 @keyframes coloress {
   0% {
-    background-color: aquamarine;
+    background-color: cornflowerblue;
   }
 
   100% {
@@ -83,7 +83,8 @@
       top: -2px;
       transform: rotate(0deg);
       transform-origin: 0% 50%;
-      animation: close-top 1000ms ease-out forwards;
+      animation: close-top 850ms ease-out forwards;
+      animation-timing-function: cubic-bezier(0.25, 0.1, 0, 1.53);
     }
 
     &::before {
@@ -96,7 +97,8 @@
       bottom: -2px;
       transform: rotate(0deg);
       transform-origin: 0% 50%;
-      animation: close-bottom 1000ms ease-out forwards;
+      animation: close-bottom 850ms forwards;
+      animation-timing-function: cubic-bezier(0.25, 0.1, 0, 1.53);
     }
   }
   &__list {
@@ -123,6 +125,10 @@
     }
     &--selected {
       text-decoration: underline;
+    }
+
+    &--no-underline:hover {
+      text-decoration: none;
     }
   }
 }
