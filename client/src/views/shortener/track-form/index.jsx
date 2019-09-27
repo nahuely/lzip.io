@@ -26,12 +26,14 @@ function TrackFormShortener({ history }) {
           <Input
             className="form__input"
             value={shortenerId}
+            required
+            type="text"
             onChange={value => setShortenerId(value.target.value)}
             placeholder="add shortenerId"
           />
         </div>
         <div className="form__controls">
-          <Button onClick={handleGoToTracking}>track shortener</Button>
+          <Button type="submit">track shortener</Button>
         </div>
       </form>
     </div>

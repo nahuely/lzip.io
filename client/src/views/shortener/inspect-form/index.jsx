@@ -26,12 +26,14 @@ function InspectFormShortener({ history }) {
           <Input
             className="form__input"
             value={shortenerId}
+            type="text"
+            required
             onChange={value => setShortenerId(value.target.value)}
             placeholder="add shortenerId"
           />
         </div>
         <div className="form__controls">
-          <Button onClick={handleGoToTracking}>inspect shortener</Button>
+          <Button type="submit">inspect shortener</Button>
         </div>
       </form>
     </div>

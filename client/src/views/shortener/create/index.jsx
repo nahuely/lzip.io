@@ -22,7 +22,8 @@ function CreateShortener({ history }) {
     setInputs([...inputs, ""]);
   }
 
-  function handleCreateShortener() {
+  function handleCreateShortener(event) {
+    event.preventDefault();
     const shortener = {
       links: inputs,
       hash: hash || undefined,
@@ -82,7 +83,7 @@ function CreateShortener({ history }) {
         </div>
       ) : (
         //form
-        <div className="form form__container">
+        <form onSubmit={handleCreateShortener} className="form form__container">
           <div className="form__header">
             <div className="form__title">
               <p>create shortener</p>
@@ -95,12 +96,14 @@ function CreateShortener({ history }) {
             <Input
               className="form__input"
               value={hash}
+              type="text"
               onChange={value => setHash(value.target.value)}
               placeholder="customize hash"
             />
             <Input
               className="form__input"
               value={description}
+              type="text"
               onChange={value => setDescription(value.target.value)}
               placeholder="add description"
             />
@@ -108,6 +111,8 @@ function CreateShortener({ history }) {
               return (
                 <Input
                   className="form__input"
+                  required
+                  type="url"
                   value={value}
                   key={index}
                   onChange={value =>
@@ -120,10 +125,10 @@ function CreateShortener({ history }) {
             <Button onClick={handleAddInput}>add more inputs</Button>
           </div>
           <div className="form__controls">
-            <Button onClick={handleCreateShortener}>create</Button>
+            <Button type="submit">create</Button>
             <Button onClick={handleResetForm}>reset</Button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );
