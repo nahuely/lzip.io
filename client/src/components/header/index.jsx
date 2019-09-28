@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { getRoute } from "../../helpers/routes";
 import routes from "../../config/routes";
+import AppContext from "../../context/appContext";
 
 import "./styles.scss";
 
 const Header = () => {
+  const state = useContext(AppContext);
+  const { links } = state;
+
   return (
     <div className="menu">
       <div className="menu__logo">
@@ -49,6 +53,18 @@ const Header = () => {
               Inspect
             </NavLink>
           </li>
+          {Boolean(links.length) && (
+            <li className="menu__item">
+              <NavLink
+                to={getRoute(["myShorteners"], routes)}
+                activeClassName="menu__link--selected"
+                className="menu__link"
+                exact
+              >
+                My Shorteners({links.length})
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>

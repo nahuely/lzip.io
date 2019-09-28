@@ -11,6 +11,11 @@ export default {
     path: "/about-us",
     component: views.AboutUs
   },
+  myShorteners: {
+    exact: true,
+    path: "/my-shorteners",
+    component: views.MyShorteners
+  },
   shortener: {
     path: "/shortener",
     routes: {
