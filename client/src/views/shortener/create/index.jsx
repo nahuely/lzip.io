@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Input, Loader } from "../../../components";
 import { RESOLVER_URL } from "../../../config/constants";
+import DispatchContext from "../../../context/dispatchContext";
 import "./styles.scss";
 
 function CreateShortener({ history }) {
@@ -11,6 +11,50 @@ function CreateShortener({ history }) {
   const [loader, setLoader] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [execute, setExecute] = useState(null);
+
+  const dispatch = useContext(DispatchContext);
+
+  useEffect(() => {
+    if (!execute) return;
+
+    async function makeRequest() {
+      try {
+        setLoader(true);
+        const response = await fetch("http://localhost:8080/api/shortener", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            links: inputs,
+            hash: hash || undefined,
+            description: description || undefined
+          })
+        });
+
+        const { data } = await response.json();
+
+        dispatch({
+          type: "addShortener",
+          payload: {
+            url: `${RESOLVER_URL}/${data.hash}`,
+            id: data.hash,
+            timestamp: new Date().toString()
+          }
+        });
+        handleResetForm();
+        setData(data.hash);
+      } catch ({ message, name }) {
+        setError(message);
+      } finally {
+        setLoader(false);
+      }
+    }
+    makeRequest();
+
+    setExecute(false);
+
+    return () => {};
+  }, [execute]);
 
   function handleChangeInput(value, index) {
     let newState = [...inputs];
@@ -24,30 +68,7 @@ function CreateShortener({ history }) {
 
   function handleCreateShortener(event) {
     event.preventDefault();
-    const shortener = {
-      links: inputs,
-      hash: hash || undefined,
-      description: description || undefined
-    };
-    setLoader(true);
-    fetch("http://localhost:8080/api/shortener", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(shortener)
-    })
-      .then(response => response.json())
-      .then(({ data }) => {
-        handleResetForm();
-        setData(data.hash);
-      })
-      .catch(({ message }) => {
-        setError(message);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
+    setExecute(true);
   }
 
   function handleResetForm() {
@@ -65,10 +86,8 @@ function CreateShortener({ history }) {
   return (
     <div className="view view__container">
       {loader ? (
-        //loading
         <Loader />
       ) : data ? (
-        //result
         <div className="create-shortener create-shortener__container">
           <p className="create-shortener__link">
             The shortener link is <span>{`${RESOLVER_URL}/${data}`}</span>
@@ -88,7 +107,6 @@ function CreateShortener({ history }) {
           </div>
         </div>
       ) : (
-        //form
         <form onSubmit={handleCreateShortener} className="form form__container">
           <div className="form__header">
             <div className="form__title">
@@ -113,21 +131,17 @@ function CreateShortener({ history }) {
               onChange={value => setDescription(value.target.value)}
               placeholder="add description"
             />
-            {inputs.map((value, index) => {
-              return (
-                <Input
-                  className="form__input"
-                  required
-                  type="url"
-                  value={value}
-                  key={index}
-                  onChange={value =>
-                    handleChangeInput(value.target.value, index)
-                  }
-                  placeholder="add url"
-                />
-              );
-            })}
+            {inputs.map((value, index) => (
+              <Input
+                className="form__input"
+                required
+                type="url"
+                value={value}
+                key={index}
+                onChange={value => handleChangeInput(value.target.value, index)}
+                placeholder="add url"
+              />
+            ))}
             <Button onClick={handleAddInput}>add more inputs</Button>
           </div>
           <div className="form__controls">
