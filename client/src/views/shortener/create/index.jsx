@@ -69,17 +69,23 @@ function CreateShortener({ history }) {
         <Loader />
       ) : data ? (
         //result
-        <div>
-          <p>{`${RESOLVER_URL}/${data}`}</p>
-          <Button
-            onClick={() => handleCopyToClipboard(`${RESOLVER_URL}/${data}`)}
-          >
-            copy shortener
-          </Button>
-          <br />
-          <Link to={`/shortener/track/${data}`}>go to tracking</Link>
-          <br />
-          <Button onClick={() => setData(null)}>create new shortener</Button>
+        <div className="create-shortener create-shortener__container">
+          <p className="create-shortener__link">
+            The shortener link is <span>{`${RESOLVER_URL}/${data}`}</span>
+          </p>
+          <div className="create-shortener__actions">
+            <Button
+              onClick={() => handleCopyToClipboard(`${RESOLVER_URL}/${data}`)}
+            >
+              copy shortener
+            </Button>
+
+            <Button onClick={() => history.push(`/shortener/track/${data}`)}>
+              go to tracking
+            </Button>
+
+            <Button onClick={() => setData(null)}>create new shortener</Button>
+          </div>
         </div>
       ) : (
         //form

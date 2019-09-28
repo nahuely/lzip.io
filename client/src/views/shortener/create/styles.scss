@@ -1,1 +1,23 @@
-@import "./../../../styles/global.scss";
+.create-shortener {
+  &__container {
+  }
+
+  &__link {
+    margin-bottom: 20px;
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > button {
+      margin-bottom: 10px;
+      width: 240px;
+    }
+  }
+}
