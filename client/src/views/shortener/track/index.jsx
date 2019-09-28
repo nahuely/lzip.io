@@ -31,11 +31,12 @@ function TrackShortener({ match, history }) {
           <p className="track-details__table-explanation">
             In this table you can see the last 5 hits in your shortener
           </p>
-          <div style={{ width: "800px" }}>
+          <div className="track-details__table-container">
             <Table.Table
               columns={tableConfig}
               rows={data.views}
               renderItem={(...props) => Table.Item(props)}
+              keyExtractor={row => row._id.toString()}
             />
           </div>
         </div>

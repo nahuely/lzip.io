@@ -13,6 +13,7 @@
     padding: 8px 15px;
     box-sizing: border-box;
     font-weight: bold;
+    box-sizing: border-box;
   }
 
   &__rows {
@@ -37,5 +38,6 @@
     padding: 8px 15px;
     white-space: nowrap;
     font-size: 14px;
+    box-sizing: border-box;
   }
 }

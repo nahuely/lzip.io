@@ -6,8 +6,12 @@ export default new Map([
     {
       title: "referer",
       prop: "referer",
-      render: (data, conf) => (
-        <a href={data.referer.toString()} target="_blank">
+      render: data => (
+        <a
+          href={data.referer.toString()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {data.referer}
         </a>
       ),
