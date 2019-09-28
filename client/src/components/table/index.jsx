@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 
-export const Item = ([row, columns]) => {
+export const Item = ([row, columns, keyExtractor]) => {
   const output = [];
   for (const [key, conf] of columns) {
     output.push(
@@ -20,13 +20,13 @@ export const Item = ([row, columns]) => {
     );
   }
   return (
-    <div className="table__row" key={row._id}>
+    <div className="table__row" key={keyExtractor(row)}>
       {output}
     </div>
   );
 };
 
-export const Table = ({ columns, rows, renderItem }) => {
+export const Table = ({ columns, rows, renderItem, keyExtractor }) => {
   function renderHeader() {
     const elements = [];
     for (const [key, data] of columns) {
@@ -44,7 +44,7 @@ export const Table = ({ columns, rows, renderItem }) => {
   }
 
   function renderRows() {
-    return rows.map(row => renderItem(row, columns));
+    return rows.map(row => renderItem(row, columns, keyExtractor));
   }
 
   return (
