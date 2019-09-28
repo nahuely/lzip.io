@@ -1,0 +1,41 @@
+.table {
+  &__container {
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+  }
+
+  &__header-cell {
+    padding: 8px 15px;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    background-color: floralwhite;
+    border-bottom: 1px solid lavenderblush;
+    &:hover {
+      background-color: azure;
+      cursor: pointer;
+      transform: scale(1.005);
+    }
+  }
+
+  &__row-cell {
+    overflow: hidden;
+    padding: 8px 15px;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+}
