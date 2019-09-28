@@ -36,7 +36,7 @@ function InspectShortener({ match, history }) {
           {data.urls.map((url, index) => (
             <div className="shortener-details__link" key={index}>
               <span>{`${index + 1}) `}</span>
-              <a href={url} target="_blank">
+              <a href={url} target="_blank" rel="noopener noreferrer">
                 {url}
               </a>
             </div>
