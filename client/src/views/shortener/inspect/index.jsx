@@ -19,7 +19,7 @@ function InspectShortener({ match, history }) {
             <p>{error.message}</p>
           </div>
           <div className="error-display__action">
-            <Button onClick={() => history.goBack()}>Try again</Button>
+            <Button onClick={history.goBack}>Try again</Button>
           </div>
         </div>
       ) : (
