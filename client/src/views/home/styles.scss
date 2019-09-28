@@ -58,7 +58,7 @@
       right: -25px;
       top: -2px;
       transform-origin: 0% 50%;
-      animation: close-gate-top 850ms linear forwards 6s;
+      animation: close-gate-top 850ms ease-out forwards 6s;
     }
 
     &::before {
@@ -70,7 +70,7 @@
       right: -25px;
       bottom: -2px;
       transform-origin: 0% 50%;
-      animation: close-gate-bottom 850ms linear forwards 6s;
+      animation: close-gate-bottom 850ms ease-out forwards 6s;
     }
   }
 
