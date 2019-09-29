@@ -7,7 +7,7 @@ function Home({ history }) {
     <div className="view view__container home">
       <div className="home__box">
         <div className="home__header">
-          <h1>WELCOME TO LZIP.IO</h1>
+          <h1>SHARE MULTIPLE LINKS AT ONCE</h1>
         </div>
         <div className="home__explanation">
           <p>you can create a shortener that resolves to many url</p>
