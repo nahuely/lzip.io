@@ -7,6 +7,26 @@
   width: auto;
   box-sizing: border-box;
   border: 2px solid black;
+  width: 100%;
+
+  &__on-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    height: 29px;
+    width: 29px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      height: 5px;
+      width: 18px;
+      background-color: red;
+      border-radius: 2px;
+    }
+  }
 
   &:focus {
     outline-offset: none;
