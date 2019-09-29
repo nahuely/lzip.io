@@ -62,6 +62,11 @@ function CreateShortener({ history }) {
     setInputs(newState);
   }
 
+  function handleRemoveInput(index) {
+    let newState = inputs.filter((_, i) => index !== i);
+    setInputs(newState);
+  }
+
   function handleAddInput() {
     setInputs([...inputs, ""]);
   }
@@ -113,7 +118,11 @@ function CreateShortener({ history }) {
               <p>create shortener</p>
             </div>
             <div className="form__explanation">
-              <p>create shortener that open multiple links</p>
+              <p>
+                create shortener that open multiple links, <br />
+                if you like you can add description and <br />
+                custom shortener name
+              </p>
             </div>
           </div>
           <div className="form__inputs">
@@ -122,14 +131,14 @@ function CreateShortener({ history }) {
               value={hash}
               type="text"
               onChange={value => setHash(value.target.value)}
-              placeholder="customize hash"
+              placeholder="Ex: best_books"
             />
             <Input
               className="form__input"
               value={description}
               type="text"
               onChange={value => setDescription(value.target.value)}
-              placeholder="add description"
+              placeholder="Ex: this is my list of best books"
             />
             {inputs.map((value, index) => (
               <Input
@@ -138,15 +147,26 @@ function CreateShortener({ history }) {
                 type="url"
                 value={value}
                 key={index}
+                onRemove={
+                  inputs.length > 1 ? () => handleRemoveInput(index) : null
+                }
                 onChange={value => handleChangeInput(value.target.value, index)}
-                placeholder="add url"
+                placeholder={
+                  index === 0
+                    ? "Ex: https://trailersfromhell.com/the-lost-world-1925/"
+                    : null
+                }
               />
             ))}
-            <Button onClick={handleAddInput}>add more inputs</Button>
+            <Button type="button" onClick={handleAddInput}>
+              add more urls
+            </Button>
           </div>
           <div className="form__controls">
             <Button type="submit">create</Button>
-            <Button onClick={handleResetForm}>reset</Button>
+            <Button type="button" onClick={handleResetForm}>
+              reset
+            </Button>
           </div>
         </form>
       )}
