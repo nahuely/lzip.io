@@ -1,12 +1,13 @@
 @import "../../styles/global.scss";
 
 .input {
-  padding: 10px 20px;
-  font-size: 15px;
+  padding: $input-padding;
+  font-size: $input-font-size;
   border: none;
   width: auto;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: $input-border;
+  background-color: $input-background;
   width: 100%;
 
   &__on-remove {
@@ -24,7 +25,7 @@
       height: 5px;
       width: 18px;
       background-color: red;
-      border-radius: 2px;
+      border-radius: $input-border-radius;
     }
   }
 

@@ -1,3 +1,5 @@
+@import "../../styles/global.scss";
+
 .table {
   &__container {
     width: 100%;
@@ -10,10 +12,9 @@
   }
 
   &__header-cell {
-    padding: 8px 15px;
+    padding: $table-header-cell-padding;
     box-sizing: border-box;
     font-weight: bold;
-    box-sizing: border-box;
   }
 
   &__rows {
@@ -35,7 +36,7 @@
 
   &__row-cell {
     overflow: hidden;
-    padding: 8px 15px;
+    padding: $table-row-cell-padding;
     white-space: nowrap;
     font-size: 14px;
     box-sizing: border-box;

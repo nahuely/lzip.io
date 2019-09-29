@@ -1,8 +1,10 @@
+@import "./styles/global.scss";
+
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: cornflowerblue; // #ffff00c2;
+  background-color: $base-color;
 
   &__header {
     height: 50px;
