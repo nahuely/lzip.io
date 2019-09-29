@@ -5,12 +5,18 @@ import routes from "../../../config/routes";
 import "./styles.scss";
 
 function InspectFormShortener({ history }) {
-  const [shortenerId, setShortenerId] = useState("");
+  const [shortenerURL, setShortenerURL] = useState("");
 
   function handleGoToTracking(event) {
     event.preventDefault();
+
+    let parsedUrl = new URL(shortenerURL);
+    let { pathname } = parsedUrl;
+    let params = pathname.split("/").filter(Boolean);
+    let shortenerID = params[params.length - 1];
+
     let route = getRoute(["shortener", "inspect"], routes);
-    route = route.replace(":shortenerId", shortenerId);
+    route = route.replace(":shortenerId", shortenerID);
     history.push(route);
   }
 
@@ -19,17 +25,23 @@ function InspectFormShortener({ history }) {
       <form onSubmit={handleGoToTracking} className="form form__container">
         <div className="form__header">
           <div className="form__title">
-            <p>inspect form</p>
+            <p>inspect shortener</p>
+          </div>
+          <div className="form__explanation">
+            <p>
+              check shortener details,
+              <br /> like description and urls
+            </p>
           </div>
         </div>
         <div className="form__inputs">
           <Input
             className="form__input"
-            value={shortenerId}
-            type="text"
+            value={shortenerURL}
+            type="url"
             required
-            onChange={value => setShortenerId(value.target.value)}
-            placeholder="add shortenerId"
+            onChange={value => setShortenerURL(value.target.value)}
+            placeholder="Ex: http://r.localhost:8080/PvoeQ"
           />
         </div>
         <div className="form__controls">
