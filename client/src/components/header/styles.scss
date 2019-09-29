@@ -115,12 +115,14 @@
   &__link {
     text-decoration: none;
     color: black;
+    text-transform: uppercase;
 
     &:hover {
       text-decoration: underline;
     }
     &--selected {
       text-decoration: underline;
+      font-weight: bold;
     }
 
     &--no-underline:hover {
