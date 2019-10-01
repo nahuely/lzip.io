@@ -1,4 +1,4 @@
-version: "3"
+version: "3.1"
 services:
   gateway:
     restart: always
@@ -13,16 +13,11 @@ services:
   cache:
     image: redis
     restart: always
-  message-broker:
-    image: redis
-    restart: always
   db:
     image: bitnami/mongodb
     restart: always
-    env_file:
-      - ./db/.env
     volumes:
-      - ./db/data:/bitnami
+      - data:/bitnami
     user: root
     ports:
       - 27017:27017
@@ -39,8 +34,14 @@ services:
       context: ./api
     volumes:
       - ./api:/code
-    env_file:
-      - ./api/.env
+    secrets:
+      - api_port
+      - db_url
+      - redis_url
+    environment:
+      PORT_FILE: /run/secrets/api_port
+      MONGODB_URL_FILE: /run/secrets/db_url
+      REDIS_URL_FILE: /run/secrets/redis_url
     depends_on:
       - db
   analytics:
@@ -50,19 +51,14 @@ services:
       context: ./analytics
     volumes:
       - ./analytics:/code
-    env_file:
-      - ./analytics/.env
+    secrets:
+      - api_port
+      - db_url
+    environment:
+      PORT_FILE: /run/secrets/api_port
+      MONGODB_URL_FILE: /run/secrets/db_url
     depends_on:
       - db
-  worker:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./worker
-    volumes:
-      - ./worker:/code
-    env_file:
-      - ./worker/.env
   resolver:
     restart: always
     build:
@@ -70,3 +66,13 @@ services:
       context: ./resolver
     volumes:
       - ./resolver/src:/usr/share/nginx/html
+secrets:
+  db_url:
+    file: ./secrets/db_url.txt
+  api_port:
+    file: ./secrets/api_port.txt
+  redis_url:
+    file: ./secrets/redis_url.txt
+
+volumes:
+  data:

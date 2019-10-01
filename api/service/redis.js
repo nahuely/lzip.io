@@ -1,2 +1,3 @@
-var Redis = require("ioredis");
-module.exports = new Redis(process.env.REDIS_URL);
+const Redis = require("ioredis");
+const { REDIS_URL } = require("../config/constants");
+module.exports = new Redis(REDIS_URL);

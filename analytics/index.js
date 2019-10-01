@@ -1,11 +1,12 @@
 const app = require("./app");
 const connect = require("./helpers/connect");
+const { DB_URL, API_PORT } = require("./config/constants");
 
 const startServer = () => {
-  connect(process.env.MONGODB_URL)
+  connect(DB_URL)
     .then(() => {
-      app.listen(process.env.PORT, () => {
-        console.info(`app listening on port ${process.env.PORT}`);
+      app.listen(API_PORT, () => {
+        console.info(`app listening on port ${API_PORT}`);
       });
     })
     .catch(console.error);
