@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <script>
+      const DOMAIN = "${DOMAIN_NAME}";
+      const API_URL = `http://api.${DOMAIN}/api`;
+      const ANALYTICS_URL = `http://analytics.${DOMAIN}`;
+
       function addMessage(message) {
         var newElement = document.createElement("p");
         var newContent = document.createTextNode(message);
@@ -21,7 +25,7 @@
       }
 
       function openPages(shortenerId) {
-        fetch(`http://localhost:8080/api/shortener/${id}`)
+        fetch(`${API_URL}/shortener/${id}`)
           .then(response => response.json())
           .then(({ data }) => {
             let success = true;
@@ -35,7 +39,7 @@
                 "you have to allow popups for this page, then refresh"
               );
             }
-            return fetch(`http://analytics.localhost:8080/api/stats`, {
+            return fetch(`${ANALYTICS_URL}/api/stats`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"

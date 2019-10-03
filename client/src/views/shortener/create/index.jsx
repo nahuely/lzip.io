@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Input, Loader } from "../../../components";
-import { RESOLVER_URL } from "../../../config/constants";
+import { RESOLVER_URL, API_URL } from "../../../config/constants";
 import DispatchContext from "../../../context/dispatchContext";
 import "./styles.scss";
 
@@ -21,7 +21,7 @@ function CreateShortener({ history }) {
     async function makeRequest() {
       try {
         setLoader(true);
-        const response = await fetch("http://localhost:8080/api/shortener", {
+        const response = await fetch(`${API_URL}/shortener`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

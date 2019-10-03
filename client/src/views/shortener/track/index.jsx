@@ -2,12 +2,13 @@ import React from "react";
 import { useFetch } from "../../../hooks";
 import { Loader, Button, Table } from "../../../components";
 import tableConfig from "./table-config";
+import { ANALYTICS_URL } from "../../../config/constants";
 import "./styles.scss";
 
 function TrackShortener({ match, history }) {
   const shortenerId = match.params.shortenerId;
   const [loader, error, data] = useFetch(
-    `http://analytics.localhost:8080/api/stats/${shortenerId}`
+    `${ANALYTICS_URL}/api/stats/${shortenerId}`
   );
 
   return (

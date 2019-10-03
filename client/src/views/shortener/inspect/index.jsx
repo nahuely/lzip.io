@@ -1,12 +1,13 @@
 import React from "react";
 import { useFetch } from "../../../hooks";
+import { API_URL } from "../../../config/constants";
 import { Loader, Button } from "../../../components";
 import "./styles.scss";
 
 function InspectShortener({ match, history }) {
   const shortenerId = match.params.shortenerId;
   const [loader, error, data] = useFetch(
-    `http://localhost:8080/api/shortener/inspect/${shortenerId}`
+    `${API_URL}/shortener/inspect/${shortenerId}`
   );
 
   return (

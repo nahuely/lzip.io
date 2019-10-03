@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Input } from "../../../components";
 import { getRoute } from "../../../helpers/routes";
 import routes from "../../../config/routes";
+import { RESOLVER_URL } from "../../../config/constants";
 import "./styles.scss";
 
 function InspectFormShortener({ history }) {
@@ -41,7 +42,7 @@ function InspectFormShortener({ history }) {
             type="url"
             required
             onChange={value => setShortenerURL(value.target.value)}
-            placeholder="Ex: http://r.localhost:8080/PvoeQ"
+            placeholder={`Ex: ${RESOLVER_URL}/PvoeQ`}
           />
         </div>
         <div className="form__controls">
