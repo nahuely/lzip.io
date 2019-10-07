@@ -9,7 +9,10 @@ const startServer = () => {
         console.info(`app listening on port ${API_PORT}`);
       });
     })
-    .catch(console.error);
+    .catch(error => {
+      console.error(error);
+      process.exit(1);
+    });
 };
 
 startServer();
