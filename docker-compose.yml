@@ -23,6 +23,11 @@ services:
     restart: always
     volumes:
       - data:/bitnami
+    environment:
+      - MONGODB_ROOT_PASSWORD=8349283akjshdka
+      - MONGODB_USERNAME=alfa
+      - MONGODB_PASSWORD=password
+      - MONGODB_DATABASE=lzip
     user: root
     ports:
       - 27017:27017
