@@ -21,6 +21,7 @@ function CreateShortener({ history }) {
     async function makeRequest() {
       try {
         setLoader(true);
+        setError(null);
         const response = await fetch(`${API_URL}/shortener`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -31,7 +32,11 @@ function CreateShortener({ history }) {
           })
         });
 
-        const { data } = await response.json();
+        const { code, message, data } = await response.json();
+
+        if (code === 400) {
+          throw new Error(message);
+        }
 
         dispatch({
           type: "addShortener",
@@ -80,6 +85,7 @@ function CreateShortener({ history }) {
     setInputs([""]);
     setHash("");
     setDescription("");
+    setError(null);
   }
 
   function handleCopyToClipboard(text) {
@@ -162,6 +168,11 @@ function CreateShortener({ history }) {
               add more urls
             </Button>
           </div>
+          {error && (
+            <div className="form__error">
+              <p>{error}</p>
+            </div>
+          )}
           <div className="form__controls">
             <Button type="submit">create</Button>
             <Button type="button" onClick={handleResetForm}>
