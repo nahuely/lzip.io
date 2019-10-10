@@ -7,10 +7,16 @@ const shortenersSchema = new Schema(
     urls: {
       type: [String],
       required: [true, "url is required"],
-      validate: {
-        validator: urls => urls.length && urls.every(validUrl.isWebUri),
-        message: "must be a valid list of urls"
-      }
+      validate: [
+        {
+          validator: urls => urls.length && urls.length <= 5,
+          message: "max urls is 5"
+        },
+        {
+          validator: urls => urls.length && urls.every(validUrl.isWebUri),
+          message: "must be a valid list of urls"
+        }
+      ]
     },
     hash: {
       type: String,
@@ -40,6 +46,16 @@ shortenersSchema.index(
   },
   { unique: true }
 );
+
+shortenersSchema.pre("save", async function(next) {
+  const shortener = await mongoose
+    .model("shortener")
+    .findOne({ hash: this.hash });
+  if (shortener) {
+    next(new Error(`the hash ${this.hash} already exist`));
+  }
+  next();
+});
 
 const Shortener = mongoose.model("shortener", shortenersSchema);
 

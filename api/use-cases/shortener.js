@@ -12,7 +12,7 @@ exports.createShortener = async function({ hash, links, description }) {
     });
     return Response.success(201, response);
   } catch (error) {
-    return Response.error(400, error);
+    return Response.error(400, error.message, error);
   }
 };
 
