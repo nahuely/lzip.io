@@ -15,11 +15,18 @@
     padding: $table-header-cell-padding;
     box-sizing: border-box;
     font-weight: bold;
+    @media only screen and (max-width: $mobile-width) {
+      & {
+        padding: $table-header-cell-padding-mobile;
+      }
+    }
   }
 
   &__rows {
     display: flex;
     flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
   }
 
   &__row {
@@ -30,15 +37,22 @@
     &:hover {
       background-color: azure;
       cursor: pointer;
-      transform: scale(1.005);
     }
   }
 
   &__row-cell {
-    overflow: hidden;
     padding: $table-row-cell-padding;
-    white-space: nowrap;
-    font-size: 14px;
     box-sizing: border-box;
+    @media only screen and (max-width: $mobile-width) {
+      & {
+        padding: $table-row-cell-padding-mobile;
+      }
+    }
+
+    > p {
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 14px;
+    }
   }
 }
