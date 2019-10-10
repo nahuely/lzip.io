@@ -18,8 +18,8 @@ function Home({ history }) {
             <div className="animation__links">
               <span className="animation__link">yahoo.com</span>
               <span className="animation__link">google.com</span>
-              <span className="animation__link">lanacion.com</span>
-              <span className="animation__link">pornhub.com</span>
+              <span className="animation__link">times.com</span>
+              <span className="animation__link">cnn.com</span>
               <span className="animation__link">lzip.io</span>
             </div>
           </div>
